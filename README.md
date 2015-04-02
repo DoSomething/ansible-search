@@ -1,38 +1,73 @@
-Role Name
+DoSomething Search
 =========
 
-A brief description of the role goes here.
-
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+DoSomething.org Search server.
 
 Role Variables
 --------------
+#### Downloading Solr
+##### Version
+Defaults to `5.0.0`.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```yml
+solr_version: 5.0.0
+```
+
+##### Mirror
+Defaults to `http://archive.apache.org/dist/lucene/solr`.
+
+```yml
+solr_mirror: http://www.us.apache.org/dist/lucene/solr
+```
+
+##### SHA 256 Sum
+SHA 265 sum of Solr `tgz` archive.  
+Defaults to `48c77aede40fceda73cf4e13e08e328899685446f80f76f2e893eaffea714297`.
+
+```yml
+solr_sha256sum: 48c77aede40fceda73cf4e13e08e328899685446f80f76f2e893eaffea714297
+```
+
+#### Setting up Solr
+##### Port
+Defaults to `8983`.
+```yml
+solr_port: 8080
+```
+
+##### Data Directory
+Defaults to `/var/solr`.
+
+```yml
+solr_data_dir: /home/app/solr
+```
+#### Solr Core
+Unification in progress.
+
+```yml
+solr_core_name: collection1
+solr_core_repo: https://github.com/DoSomething/solr-core-drupal.git
+solr_core_version: v1.0.alpha2-7.x-1.7-solr-5.x
+```
+
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+- [`dosomething.base`](https://github.com/DoSomething/ansible-base)
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Usage example:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yml
+- hosts: servers
+  roles:
+     - { role: dosomething.search, solr_port: 8080 }
+```
 
 License
 -------
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+MIT
